@@ -88,7 +88,7 @@ const btt = document.getElementById('btt');
 window.addEventListener('scroll', () => btt.classList.toggle('show', scrollY > 500), { passive: true });
 btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-/* --- Formulario de contacto — EmailJS --- */
+/* --- Formulario de contacto --- */
 const cform = document.getElementById('cform');
 const fmsg  = document.getElementById('fmsg');
 if (cform) {
@@ -106,33 +106,9 @@ if (cform) {
       fmsg.textContent = '⚠ Introduce un email válido.';
       return;
     }
-
-    const submitBtn = cform.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
-
-    const templateParams = {
-      from_name:    v('nombre'),
-      from_company: v('empresa') || '—',
-      from_email:   v('email'),
-      subject:      v('asunto'),
-      message:      v('mensaje'),
-    };
-
-    emailjs.send('service_edlm3qm', 'template_atevxqs', templateParams)
-      .then(() => {
-        fmsg.className = 'form-msg ok show';
-        fmsg.textContent = '✓ ¡Mensaje enviado! Me pondré en contacto contigo pronto.';
-        cform.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje →';
-        setTimeout(() => { fmsg.className = 'form-msg'; }, 6000);
-      })
-      .catch(() => {
-        fmsg.className = 'form-msg err show';
-        fmsg.textContent = '✗ Error al enviar. Escríbeme directamente a emilianamaro@hotmail.com';
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje →';
-      });
+    fmsg.className = 'form-msg ok show';
+    fmsg.textContent = '✓ ¡Mensaje enviado! Me pondré en contacto contigo pronto.';
+    cform.reset();
+    setTimeout(() => { fmsg.className = 'form-msg'; }, 5000);
   });
 }
